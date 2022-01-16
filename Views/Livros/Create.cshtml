@@ -1,63 +1,71 @@
-﻿@model Biblioteca.Models.Livro
+﻿@model Biblioteca.ViewModels.LivroViewModel
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Livro</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<div class="card">
+    <div class="card-header">
+        <h3 class="text-uppercase">Cadastro de Livros</h3>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Editora" class="control-label"></label>
-                <input asp-for="Editora" class="form-control" />
-                <span asp-validation-for="Editora" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnoPublicacao" class="control-label"></label>
-                <input asp-for="AnoPublicacao" class="form-control" />
-                <span asp-validation-for="AnoPublicacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
-                <span asp-validation-for="Foto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataEmprestimo" class="control-label"></label>
-                <input asp-for="DataEmprestimo" class="form-control" />
-                <span asp-validation-for="DataEmprestimo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraEmprestimo" class="control-label"></label>
-                <input asp-for="HoraEmprestimo" class="form-control" />
-                <span asp-validation-for="HoraEmprestimo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Titulo" class="control-label"></label>
+                        <input asp-for="Titulo" class="form-control" />
+                        <span asp-validation-for="Titulo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descricao" class="control-label"></label>
+                        <input asp-for="Descricao" class="form-control" />
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Editora" class="control-label"></label>
+                        <input asp-for="Editora" class="form-control" />
+                        <span asp-validation-for="Editora" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AnoPublicacao" class="control-label"></label>
+                        <input asp-for="AnoPublicacao" class="form-control" />
+                        <span asp-validation-for="AnoPublicacao" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="LivroFoto" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="LivroFoto" class="custom-file-input" />
+                                <label class="custom-file-label" for="customFile">Escolha a foto</label>
+                            </div>
+                            <span asp-validation-for="LivroFoto" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DataEmprestimo" class="control-label"></label>
+                        <input asp-for="DataEmprestimo" class="form-control" />
+                        <span asp-validation-for="DataEmprestimo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HoraEmprestimo" class="control-label"></label>
+                        <input asp-for="HoraEmprestimo" class="form-control" />
+                        <span asp-validation-for="HoraEmprestimo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Adicionar" class="btn btn-sm btn-primary rounded-0" />
+                        <a asp-action="Index" class="btn btn-sm btn-primary rounded-0">Voltar</a>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -11,6 +11,6 @@ namespace Biblioteca.ViewModels
     {
         [Required]
         [Display(Name = "Foto")]
-        public IFormFile PalestranteFoto { get; set; }
+        public IFormFile LivroFoto { get; set; }
     }
 }

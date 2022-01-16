@@ -10,6 +10,7 @@ namespace Biblioteca.ViewModels
     {
         [Required]
         [StringLength(100)]
+        [Display(Name = "Titulo do Livro")]
         public string Titulo { get; set; }
 
         [Required]
@@ -20,24 +21,21 @@ namespace Biblioteca.ViewModels
         [Required]
         [StringLength(200)]
         [Display(Name = "Editora")]
-        public int Editora { get; set; }
+        public string Editora { get; set; }
 
         [Required]
         [StringLength(10)]
+        [Display(Name = "Ano de Publicação")]
         public string AnoPublicacao { get; set; }
 
         [Required]
-        [StringLength(300)]
-        public string Foto { get; set; }
-
-        [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "DataEmprestimo")]
+        [Display(Name = "Data de Emprestimo")]
         public DateTime DataEmprestimo { get; set; }
 
         [Required]
         [DataType(DataType.Time)]
-        [Display(Name = "HoraEmprestimo")]
+        [Display(Name = "Hora de Emprestimo")]
         public DateTime HoraEmprestimo { get; set; }
     }
 }

@@ -23,13 +23,12 @@ namespace Biblioteca.Models
         [Required]
         [StringLength(200)]
         [Display(Name = "Editora")]
-        public int Editora { get; set; }
+        public string Editora { get; set; }
 
         [Required]
         [StringLength(10)]
         public string AnoPublicacao { get; set; }
 
-        [Required]
         [StringLength(300)]
         public string Foto { get; set; }
 
