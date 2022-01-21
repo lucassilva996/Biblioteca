@@ -1,64 +1,89 @@
-﻿@model Biblioteca.Models.Livro
+﻿@model Biblioteca.ViewModels.LivroViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
-
-<h4>Livro</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="card">
+    <div class="card-header">
+        <h3 class="text-uppercase">Editar Livro</h3>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Titulo" class="control-label"></label>
+                        <input asp-for="Titulo" class="form-control" />
+                        <span asp-validation-for="Titulo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descricao" class="control-label"></label>
+                        <input asp-for="Descricao" class="form-control" height="180" width="180" />
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Editora" class="control-label"></label>
+                        <input asp-for="Editora" class="form-control" />
+                        <span asp-validation-for="Editora" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="AnoPublicacao" class="control-label"></label>
+                        <input asp-for="AnoPublicacao" class="form-control" />
+                        <span asp-validation-for="AnoPublicacao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="LivroFoto" class="control-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="LivroFoto" class="custom-file-input" />
+                            <label class="custom-file-label" for="customFile">Escolha a foto</label>
+                        </div>
+                        <span asp-validation-for="LivroFoto" class="text-danger"></span>
+                        <img src="~/Uploads/@Model.ImagemExistente" class="img-thumbnail" height="180" width="180" asp-append-version="true" />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DataEmprestimo" class="control-label"></label>
+                        <input asp-for="DataEmprestimo" class="form-control" />
+                        <span asp-validation-for="DataEmprestimo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="HoraEmprestimo" class="control-label"></label>
+                        <input asp-for="HoraEmprestimo" class="form-control" />
+                        <span asp-validation-for="HoraEmprestimo" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+
             <div class="form-group">
-                <label asp-for="Editora" class="control-label"></label>
-                <input asp-for="Editora" class="form-control" />
-                <span asp-validation-for="Editora" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnoPublicacao" class="control-label"></label>
-                <input asp-for="AnoPublicacao" class="form-control" />
-                <span asp-validation-for="AnoPublicacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
-                <span asp-validation-for="Foto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataEmprestimo" class="control-label"></label>
-                <input asp-for="DataEmprestimo" class="form-control" />
-                <span asp-validation-for="DataEmprestimo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoraEmprestimo" class="control-label"></label>
-                <input asp-for="HoraEmprestimo" class="form-control" />
-                <span asp-validation-for="HoraEmprestimo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <button type="submit" class="btn btn-sm btn-info rounded-0"><i class="fa fa-pencil-alt"></i> Atualizar</button>
+                <a asp-action="Index" class="btn btn-sm btn-primary rounded-0"><i class="fas fa-fast-backward"></i> Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
